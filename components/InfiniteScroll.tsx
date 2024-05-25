@@ -1,29 +1,14 @@
 import { useState, useEffect, useRef, FC } from "react";
 import { ScrollArea, Input, Loader, CloseButton, Button } from "@mantine/core";
 
-const fetchData = async ({
-  searchTerm,
-  page,
-  apiUrl,
-}: {
-  apiUrl: string;
-  searchTerm: string;
-  page: number;
-}): Promise<any[]> => {
-  const itemsPerPage = 10;
-  const response = await fetch(
-    `${apiUrl}?q=${searchTerm}&page=${page}&limit=${itemsPerPage}`
-  );
-  const { data } = await response.json();
-  return data;
-};
-
 const InfiniteScroll = ({
   renderRow,
-  apiUrl,
+  getData,
   disabled,
+  limit = 10,
 }: {
-  apiUrl: string;
+  getData: (p: any) => any;
+  limit?: number;
   renderRow: (p: any, b: any) => any;
   disabled?: boolean;
 }) => {
@@ -41,14 +26,14 @@ const InfiniteScroll = ({
 
     const loadMoreItems = async () => {
       setLoading(true);
-      const newItems = await fetchData({
-        searchTerm: debouncedSearchTerm,
+      const { data } = getData({
+        query: debouncedSearchTerm,
         page,
-        apiUrl,
+        limit,
       });
-      setItems((prev) => [...prev, ...newItems]);
+      setItems((prev) => [...prev, ...data]);
       setLoading(false);
-      setHasMore(newItems.length > 0);
+      setHasMore(data.length > 0);
     };
 
     loadMoreItems();

@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "fet": "node ./geteslintrules.js"
+    "lint": "next lint"
   },
   "dependencies": {
     "@mantine/core": "^7.9.2",

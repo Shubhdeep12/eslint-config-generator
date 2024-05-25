@@ -5,8 +5,9 @@ import { CloseButton, Input, Select } from "@mantine/core";
 import { useData } from "../containers/DataContainer";
 import { DataProps, RulesType } from "../types";
 import InfiniteScroll from "./InfiniteScroll";
+import getPaginatedData from "@/utils/getPaginatedData";
 
-export default function Rules() {
+export default function Rules({ rules }: { rules: string }) {
   const { setData } = useData();
   const [rulesState, setRulesState] = useState<RulesType>({});
 
@@ -19,7 +20,12 @@ export default function Rules() {
       label="Include Rules"
     >
       <InfiniteScroll
-        apiUrl="/api/eslint-rules"
+        getData={(props) =>
+          getPaginatedData({
+            ...props,
+            data: JSON.parse(rules || "{}"),
+          })
+        }
         renderRow={(item, itemDisabled) => {
           for (const name in item) {
             return (
