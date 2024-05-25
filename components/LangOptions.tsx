@@ -198,7 +198,7 @@ export default function LangOptions() {
 
   useEffect(() => {
     setData((prev) => ({ ...prev, langOptions }));
-  }, [langOptions]);
+  }, [langOptions, setData]);
 
   return (
     <Item

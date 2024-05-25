@@ -30,14 +30,13 @@ export default function Item({
     return Children.map(children, (child) => {
       return cloneElement(child, {
         disabled: isDisabled || disabled,
-        setDisabled: setIsDisabled,
       });
     });
   };
 
   useEffect(() => {
     if (onChange) onChange(isDisabled || disabled);
-  }, [disabled]);
+  }, [disabled, onChange, isDisabled]);
 
   return (
     <div className="flex flex-col items-start gap-4">

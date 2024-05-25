@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef, FC } from "react";
-import { ScrollArea, Input, Loader, CloseButton, Button } from "@mantine/core";
+"use client";
+import { useState, useEffect, useRef } from "react";
+import { ScrollArea, Input, CloseButton, Button } from "@mantine/core";
 
 const InfiniteScroll = ({
   renderRow,
@@ -41,7 +42,7 @@ const InfiniteScroll = ({
     return () => {
       controller.abort();
     };
-  }, [page, debouncedSearchTerm]);
+  }, [page, debouncedSearchTerm, getData, limit]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
