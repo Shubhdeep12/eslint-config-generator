@@ -1,10 +1,10 @@
-import FilesAndIgnores from "@/src/components/FilesAndIgnores";
-import Format from "@/src/components/Format";
-import LangOptions from "@/src/components/LangOptions";
-import LinterOptions from "@/src/components/LinterOptions";
-import Name from "@/src/components/Name";
-import RenderJSON from "@/src/components/RenderJSON";
-import Rules from "@/src/components/Rules";
+import FilesAndIgnores from "@/components/FilesAndIgnores";
+import Format from "@/components/Format";
+import LangOptions from "@/components/LangOptions";
+import LinterOptions from "@/components/LinterOptions";
+import Name from "@/components/Name";
+import RenderJSON from "@/components/RenderJSON";
+import Rules from "@/components/Rules";
 
 export default function Home() {
   return (

@@ -4,9 +4,9 @@ import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import MainContent from "@/src/components/MainContent";
-import Navbar from "@/src/components/Navbar";
-import { DataProvider } from "@/src/containers/DataContainer";
+import { DataProvider } from "@/containers/DataContainer";
+import Navbar from "@/components/Navbar";
+import MainContent from "@/components/MainContent";
 
 const inter = Inter({ subsets: ["latin"] });
 
