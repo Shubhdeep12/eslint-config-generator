@@ -1,9 +1,10 @@
-"use server";
-import { Linter } from "eslint";
+import eslintBase from "eslint"; // eslint v9
+// import { Linter } from "eslint"; // eslint v8
 
 export async function getEslintRules() {
-  const linter = new Linter();
-  const rules = linter.getRules();
+  // const linter = new Linter(); // v8
+  const rules = new eslintBase.Linter({ configType: "eslintrc" }).getRules();
+  // const rules = linter.getRules(); //v8
 
   let obj: any = {};
 

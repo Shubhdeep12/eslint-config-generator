@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { Input, Select } from "@mantine/core";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -198,7 +199,7 @@ export default function LangOptions() {
 
   useEffect(() => {
     setData((prev) => ({ ...prev, langOptions }));
-  }, [langOptions, setData]);
+  }, [langOptions]);
 
   return (
     <Item

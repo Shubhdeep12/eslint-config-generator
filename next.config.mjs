@@ -2,7 +2,7 @@
 const nextConfig = {
   basePath: "/eslint-config-generator",
   output: "export",
-  reactStrictMode: true,
+  reactStrictMode: false,
 };
 
 export default nextConfig;

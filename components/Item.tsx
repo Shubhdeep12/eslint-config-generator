@@ -36,7 +36,8 @@ export default function Item({
 
   useEffect(() => {
     if (onChange) onChange(isDisabled || disabled);
-  }, [disabled, onChange, isDisabled]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [disabled]);
 
   return (
     <div className="flex flex-col items-start gap-4">

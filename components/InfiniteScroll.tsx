@@ -42,7 +42,8 @@ const InfiniteScroll = ({
     return () => {
       controller.abort();
     };
-  }, [page, debouncedSearchTerm, getData, limit]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, debouncedSearchTerm, limit]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);

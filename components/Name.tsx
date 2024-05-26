@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { Input } from "@mantine/core";
 import { useData } from "../containers/DataContainer";

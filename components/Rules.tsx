@@ -10,7 +10,6 @@ import getPaginatedData from "@/utils/getPaginatedData";
 export default function Rules({ rules }: { rules: string }) {
   const { setData } = useData();
   const [rulesState, setRulesState] = useState<RulesType>({});
-
   return (
     <Item
       onChange={(disabled) => {
