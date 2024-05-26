@@ -35,10 +35,12 @@ export default function RenderJSON({}: Props) {
   const { data = {} } = useData();
 
   const cleanData = cleanJSON(data);
-
-  return (
-    <div>
-      <LazyReactJson src={cleanData} />
-    </div>
-  );
+  if (typeof window !== "undefined") {
+    return (
+      <div>
+        <LazyReactJson src={cleanData} />
+      </div>
+    );
+  }
+  return <></>;
 }
