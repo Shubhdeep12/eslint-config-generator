@@ -73,6 +73,10 @@ function RenderParserOptions({
     jsx: langOptions.jsx,
   });
 
+  useEffect(() => {
+    setLangOptions((prev) => ({ ...prev, ...localData }));
+  }, [localData]);
+
   return (
     <>
       <Item
@@ -128,11 +132,11 @@ function RenderParserOptions({
           label="globalReturn"
         >
           <Select
-            value={String(langOptions.globalReturn)}
+            value={String(localData.globalReturn)}
             data={["true", "false"]}
             placeholder="Select value"
             onChange={(e) =>
-              setLangOptions((prev) => ({
+              setlocalData((prev) => ({
                 ...prev,
                 globalReturn: Boolean(e),
               }))
@@ -152,11 +156,11 @@ function RenderParserOptions({
           label="impliedStrict"
         >
           <Select
-            value={String(langOptions.impliedStrict)}
+            value={String(localData.impliedStrict)}
             data={["true", "false"]}
             placeholder="Select value"
             onChange={(e) =>
-              setLangOptions((prev) => ({
+              setlocalData((prev) => ({
                 ...prev,
                 impliedStrict: Boolean(e),
               }))
@@ -176,11 +180,11 @@ function RenderParserOptions({
           label="jsx"
         >
           <Select
-            value={String(langOptions.jsx)}
+            value={String(localData.jsx)}
             data={["true", "false"]}
             placeholder="Select value"
             onChange={(e) =>
-              setLangOptions((prev) => ({
+              setlocalData((prev) => ({
                 ...prev,
                 jsx: Boolean(e),
               }))

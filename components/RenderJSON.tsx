@@ -1,7 +1,8 @@
 "use client";
 type Props = {};
-import { lazy } from "react";
+import { lazy, useState } from "react";
 import { useData } from "../containers/DataContainer";
+import { Button } from "@mantine/core";
 const LazyReactJson = lazy(() => import("react-json-view"));
 
 function cleanJSON(data: any): any {
@@ -33,14 +34,17 @@ function cleanJSON(data: any): any {
 
 export default function RenderJSON({}: Props) {
   const { data = {} } = useData();
-
+  const [treeVisible, setTreeVisible] = useState(false);
   const cleanData = cleanJSON(data);
-  if (typeof window !== "undefined") {
-    return (
-      <div>
-        <LazyReactJson src={cleanData} />
-      </div>
-    );
-  }
-  return <></>;
+  return (
+    <div>
+      <Button
+        variant="gradient"
+        onClick={() => setTreeVisible((prev) => !prev)}
+      >
+        {treeVisible ? "Hide Config" : "Show Config"}
+      </Button>
+      {treeVisible && <LazyReactJson src={cleanData} />}
+    </div>
+  );
 }
