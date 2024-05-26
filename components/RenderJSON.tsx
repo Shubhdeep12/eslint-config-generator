@@ -1,7 +1,8 @@
 "use client";
 type Props = {};
-import ReactJson from "react-json-view";
+import { lazy } from "react";
 import { useData } from "../containers/DataContainer";
+const LazyReactJson = lazy(() => import("react-json-view"));
 
 function cleanJSON(data: any): any {
   if (Array.isArray(data)) {
@@ -34,8 +35,10 @@ export default function RenderJSON({}: Props) {
   const { data = {} } = useData();
 
   const cleanData = cleanJSON(data);
-  if (typeof window === "undefined") {
-    return <p>{JSON.stringify(data || {})}</p>;
-  }
-  return <ReactJson src={cleanData} />;
+
+  return (
+    <div>
+      <LazyReactJson src={cleanData} />
+    </div>
+  );
 }
