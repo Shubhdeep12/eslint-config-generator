@@ -5,5 +5,5 @@ import { useData } from "../containers/DataContainer";
 
 export default function RenderJSON({}: Props) {
   const { data = {} } = useData();
-  return <p>{JSON.stringify(data)}</p>;
+  return <ReactJson src={data} />;
 }
