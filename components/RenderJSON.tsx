@@ -34,7 +34,7 @@ export default function RenderJSON({}: Props) {
   const { data = {} } = useData();
 
   const cleanData = cleanJSON(data);
-  if (typeof document === "undefined") {
+  if (typeof window === "undefined") {
     return <p>{JSON.stringify(data || {})}</p>;
   }
   return <ReactJson src={cleanData} />;
