@@ -2,7 +2,9 @@
 type Props = {};
 import { lazy, useState } from "react";
 import { useData } from "../containers/DataContainer";
-import { Button } from "@mantine/core";
+import { Button, Text } from "@mantine/core";
+import Chevron from "@/assets/Chevron";
+import { cn } from "@/utils/cn";
 const LazyReactJson = lazy(() => import("react-json-view"));
 
 function cleanJSON(data: any): any {
@@ -33,17 +35,29 @@ function cleanJSON(data: any): any {
 }
 
 export default function RenderJSON({}: Props) {
-  const { data = {} } = useData();
+  const { data } = useData();
+  const { format, ..._data } = data;
   const [treeVisible, setTreeVisible] = useState(false);
-  const cleanData = cleanJSON(data);
+  let cleanData = cleanJSON(_data);
+
   return (
-    <div>
-      <Button
-        variant="gradient"
-        onClick={() => setTreeVisible((prev) => !prev)}
-      >
-        {treeVisible ? "Hide Config" : "Show Config"}
-      </Button>
+    <div className="flex flex-col gap-4">
+      <div className="p-2 w-full justify-between bg-black rounded-md flex items-center">
+        <Text className="!font-semibold" c="white" size="lg">{`eslint.config${
+          format === "esm" ? ".mjs" : ".cjs"
+        }`}</Text>
+
+        <Button
+          variant="filled"
+          color="dark"
+          size="compact-sm"
+          onClick={() => setTreeVisible((prev) => !prev)}
+        >
+          <Text className="!font-semibold">{`${
+            treeVisible ? "Hide config" : "Show config"
+          }`}</Text>
+        </Button>
+      </div>
       {treeVisible && <LazyReactJson src={cleanData} />}
     </div>
   );

@@ -20,7 +20,7 @@ export type DataProps = {
   format: string;
   langOptions?: LangOptionsTypes;
   linterOptions?: LinterOptionsTypes;
-  files?: [];
-  ignores?: [];
+  files?: string[];
+  ignores?: string[];
   rules?: RulesType;
 };

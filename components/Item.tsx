@@ -1,6 +1,7 @@
 "use client";
 
-import { Checkbox } from "@mantine/core";
+import { cn } from "@/utils/cn";
+import { Checkbox, MenuLabel } from "@mantine/core";
 import {
   Children,
   ReactElement,
@@ -12,9 +13,14 @@ import {
 type ItemProps = {
   label: string;
   disabled?: boolean;
-  children: ReactElement | ReactElement[];
+  children?: ReactElement | ReactElement[];
   defaultInclude?: boolean;
   onChange?: (val: boolean) => void;
+  className?: string;
+  type?: string | React.ElementType;
+  labelClassName?: string;
+  childrenClassName?: string;
+  size?: string;
 };
 
 export default function Item({
@@ -23,14 +29,20 @@ export default function Item({
   children,
   defaultInclude = false,
   onChange,
+  className = "",
+  type = "h2",
+  labelClassName = "font-semibold text-2xl",
+  childrenClassName = "",
+  size = "md",
 }: ItemProps) {
   const [isDisabled, setIsDisabled] = useState<boolean>(!defaultInclude);
 
   const renderChildren = () => {
     return Children.map(children, (child) => {
-      return cloneElement(child, {
-        disabled: isDisabled || disabled,
-      });
+      if (child)
+        return cloneElement(child, {
+          disabled: isDisabled || disabled,
+        });
     });
   };
 
@@ -38,22 +50,36 @@ export default function Item({
     if (onChange) onChange(isDisabled || disabled);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [disabled]);
-
+  const Label = type;
   return (
-    <div className="flex flex-col items-start gap-4">
-      <Checkbox
-        disabled={disabled}
-        checked={!isDisabled}
-        onChange={(e) => {
-          setIsDisabled((prev) => !prev);
-          if (onChange) onChange(!e.target.checked || disabled);
-        }}
-        size="sm"
-        color="rgba(0,0,0,1)"
-        label={label}
-      />
+    <div className={cn(className, " border rounded-md p-4 mb-2")}>
+      <div className="flex gap-2 items-center mb-4 px-4">
+        <Checkbox
+          disabled={disabled}
+          checked={!isDisabled}
+          onChange={(e) => {
+            setIsDisabled((prev) => !prev);
+            if (onChange) onChange(!e.target.checked || disabled);
+          }}
+          size={size}
+          color="rgba(0,0,0,1)"
+        />
+        <Label className={cn(labelClassName)}>{label}</Label>
+      </div>
 
-      {renderChildren()}
+      {children ? (
+        <div
+          className={cn(
+            childrenClassName,
+            "transition-all p-4 rounded-md",
+            `${isDisabled ? "opacity-80 " : "opacity-1"}`
+          )}
+        >
+          {renderChildren()}
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

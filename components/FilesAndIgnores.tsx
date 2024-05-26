@@ -1,12 +1,35 @@
 "use client";
-import { Checkbox } from "@mantine/core";
 import { useData } from "../containers/DataContainer";
+import Item from "./Item";
 
 export default function FilesAndIgnores() {
-  const { data, setData } = useData();
+  const { setData } = useData();
   return (
     <div>
-      <Checkbox
+      <Item
+        labelClassName="text-xl"
+        type="h3"
+        onChange={(disabled) => {
+          setData((prev) => ({
+            ...prev,
+            files: !disabled ? ["./app/**/*.{js,ts,jsx,tsx,mdx}"] : undefined,
+          }));
+        }}
+        label="Include files config"
+      />
+
+      <Item
+        labelClassName="text-xl"
+        type="h3"
+        onChange={(disabled) => {
+          setData((prev) => ({
+            ...prev,
+            ignores: !disabled ? ["./node_modules"] : undefined,
+          }));
+        }}
+        label="Include ignores config"
+      />
+      {/* <Checkbox
         checked={!!data?.files}
         onChange={(e) =>
           setData((prev) => ({
@@ -14,7 +37,7 @@ export default function FilesAndIgnores() {
             files: !prev.files ? [] : undefined,
           }))
         }
-        size="sm"
+        size="md"
         color="rgba(0,0,0,1)"
         label={"Include files config"}
       />
@@ -26,10 +49,10 @@ export default function FilesAndIgnores() {
             ignores: !prev.ignores ? [] : undefined,
           }))
         }
-        size="sm"
+        size="md"
         color="rgba(0,0,0,1)"
         label={"Include ignores config"}
-      />
+      /> */}
     </div>
   );
 }

@@ -85,16 +85,25 @@ const InfiniteScroll = ({
           />
         }
       />
-      <ScrollArea style={{ height: "60vh" }}>
-        {items.map((item, index) => renderRow(item, disabled))}
-        {hasMore && (
-          <Button
-            disabled={loading || disabled}
-            onClick={() => setPage((prev) => prev + 1)}
-          >
-            Fetch more
-          </Button>
-        )}
+      <ScrollArea className="h-[60vh]">
+        <div className="flex flex-col items-center gap-4 w-full">
+          <div className="flex gap-4 flex-wrap">
+            {loading ? (
+              <span>Searching...</span>
+            ) : (
+              items.map((item, index) => renderRow(item, disabled))
+            )}
+          </div>
+          {hasMore && (
+            <Button
+              disabled={loading || disabled}
+              onClick={() => setPage((prev) => prev + 1)}
+              color="dark"
+            >
+              Fetch more
+            </Button>
+          )}
+        </div>
       </ScrollArea>
     </div>
   );

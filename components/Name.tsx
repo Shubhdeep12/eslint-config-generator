@@ -22,10 +22,14 @@ export default function Name() {
       }}
       defaultInclude
       label="Name"
+      className="w-auto"
     >
       <Input
         placeholder="Enter name of project"
         value={name}
+        color="black"
+        radius="md"
+        size="md"
         onChange={(e) => setName(e.target.value)}
       />
     </Item>

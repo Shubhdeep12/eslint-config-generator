@@ -19,8 +19,9 @@ export default function LinterOptions() {
         else setData((prev) => ({ ...prev, linterOptions }));
       }}
       label="Include Linter options"
+      childrenClassName="flex w-full gap-4"
     >
-      <Item
+      {/* <Item
         onChange={(disabled) => {
           if (disabled)
             setData((prev) => ({
@@ -40,21 +41,29 @@ export default function LinterOptions() {
             }));
         }}
         label="noInlineConfig"
-      >
-        <Select
-          value={String(linterOptions?.noInlineConfig)}
-          data={["true", "false"]}
-          placeholder="Select value"
-          onChange={(e) =>
-            setLinterOptions((prev) => ({
-              ...prev,
-              noInlineConfig: Boolean(e),
-            }))
-          }
-        />
-      </Item>
+      > */}
+      <Select
+        clearable
+        label="noInlineConfig"
+        onClear={() =>
+          setLinterOptions((prev) => ({
+            ...prev,
+            noInlineConfig: undefined,
+          }))
+        }
+        value={String(linterOptions?.noInlineConfig)}
+        data={["true", "false"]}
+        placeholder="Select value"
+        onChange={(e) =>
+          setLinterOptions((prev) => ({
+            ...prev,
+            noInlineConfig: Boolean(e),
+          }))
+        }
+      />
+      {/* </Item> */}
 
-      <Item
+      {/* <Item
         onChange={(disabled) => {
           if (disabled)
             setData((prev) => ({
@@ -75,19 +84,27 @@ export default function LinterOptions() {
             }));
         }}
         label="reportUnusedDisableDirectives"
-      >
-        <Select
-          value={String(linterOptions?.reportUnusedDisableDirectives)}
-          data={["true", "false"]}
-          placeholder="Select value"
-          onChange={(e) =>
-            setLinterOptions((prev) => ({
-              ...prev,
-              reportUnusedDisableDirectives: Boolean(e),
-            }))
-          }
-        />
-      </Item>
+      > */}
+      <Select
+        label="reportUnusedDisableDirectives"
+        clearable
+        onClear={() =>
+          setLinterOptions((prev) => ({
+            ...prev,
+            reportUnusedDisableDirectives: undefined,
+          }))
+        }
+        value={String(linterOptions?.reportUnusedDisableDirectives)}
+        data={["true", "false"]}
+        placeholder="Select value"
+        onChange={(e) =>
+          setLinterOptions((prev) => ({
+            ...prev,
+            reportUnusedDisableDirectives: Boolean(e),
+          }))
+        }
+      />
+      {/* </Item> */}
     </Item>
   );
 }

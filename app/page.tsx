@@ -10,8 +10,8 @@ import { getEslintRules } from "@/lib/eslintrules";
 export default async function Home() {
   const rules = await getEslintRules();
   return (
-    <div className="flex p-6 w-full">
-      <section className="left-section w-1/2 flex-[0.5] flex flex-col divide-y gap-4 max-h-screen overflow-auto">
+    <div className="flex w-full h-[calc(100vh-124px)]">
+      <section className="good-scroll left-section w-2/3 p-6 flex flex-col h-full overflow-auto">
         <Format />
         <Name />
         <LangOptions />
@@ -19,7 +19,7 @@ export default async function Home() {
         <LinterOptions />
         <Rules rules={JSON.stringify(rules || {})} />
       </section>
-      <section className="right-section flex-[0.5] w-1/2">
+      <section className="right-section w-1/3 h-full">
         <RenderJSON />
       </section>
     </div>

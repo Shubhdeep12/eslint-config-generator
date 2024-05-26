@@ -19,6 +19,7 @@ export default function Rules({ rules }: { rules: string }) {
       label="Include Rules"
     >
       <InfiniteScroll
+        limit={20}
         getData={(props) =>
           getPaginatedData({
             ...props,
@@ -28,40 +29,54 @@ export default function Rules({ rules }: { rules: string }) {
         renderRow={(item, itemDisabled) => {
           for (const name in item) {
             return (
-              <Item
+              // <Item
+              //   disabled={itemDisabled}
+              //   defaultInclude={Object.keys(rulesState).includes(name)}
+              //   onChange={(isItemDisabled) => {
+              //     if (isItemDisabled)
+              //       setData((prev) => ({
+              //         ...prev,
+              //         rules: { ...prev.rules, [name]: undefined },
+              //       }));
+              //     else
+              //       setData((prev) => ({
+              //         ...prev,
+              //         rules: { ...prev.rules, [name]: rulesState?.[name] },
+              //       }));
+              //   }}
+              //   label={name}
+              //   key={name}
+              // >
+              <Select
                 disabled={itemDisabled}
-                defaultInclude={Object.keys(rulesState).includes(name)}
-                onChange={(isItemDisabled) => {
-                  if (isItemDisabled)
-                    setData((prev) => ({
-                      ...prev,
-                      rules: { ...prev.rules, [name]: undefined },
-                    }));
-                  else
-                    setData((prev) => ({
-                      ...prev,
-                      rules: { ...prev.rules, [name]: rulesState?.[name] },
-                    }));
-                }}
                 label={name}
                 key={name}
-              >
-                <Select
-                  value={String(rulesState?.[name])}
-                  placeholder="Select value"
-                  data={["off", "warn", "error"]}
-                  onChange={(e) => {
-                    setRulesState((prev) => ({
-                      ...prev,
-                      [name]: e || undefined,
-                    }));
-                    setData((prev) => ({
-                      ...prev,
-                      rules: { ...prev.rules, [name]: e || undefined },
-                    }));
-                  }}
-                />
-              </Item>
+                clearable
+                onClear={() => {
+                  setRulesState((prev) => ({
+                    ...prev,
+                    [name]: undefined,
+                  }));
+                  setData((prev) => ({
+                    ...prev,
+                    rules: { ...prev.rules, [name]: undefined },
+                  }));
+                }}
+                value={String(rulesState?.[name])}
+                placeholder="Select value"
+                data={["off", "warn", "error"]}
+                onChange={(e) => {
+                  setRulesState((prev) => ({
+                    ...prev,
+                    [name]: e || undefined,
+                  }));
+                  setData((prev) => ({
+                    ...prev,
+                    rules: { ...prev.rules, [name]: e || undefined },
+                  }));
+                }}
+              />
+              // </Item>
             );
           }
         }}

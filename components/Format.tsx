@@ -17,8 +17,8 @@ export default function Format({}: Props) {
     },
   ];
   return (
-    <div>
-      <label className="font-medium text-sm">Format</label>
+    <div className="px-4">
+      <h2 className="font-semibold text-2xl mb-4">Format</h2>
       <List className="flex gap-3">
         {FORMAT_TYPES.map(({ id, label }) => (
           <ListItem key={id}>
@@ -27,6 +27,7 @@ export default function Format({}: Props) {
               checked={data.format === id}
               onChange={() => setData((prev) => ({ ...prev, format: id }))}
               color="rgba(0, 0, 0, 1)"
+              size="md"
             />
           </ListItem>
         ))}

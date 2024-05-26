@@ -15,18 +15,29 @@ function RenderEcmaVersion({
   langOptions: LangOptionsTypes;
   setLangOptions: Dispatch<SetStateAction<LangOptionsTypes>>;
 }) {
-  const [customEcmaVersion, setCustomEcmaVersion] = useState({
+  const [customEcmaVersion, setCustomEcmaVersion] = useState<{
+    edit?: boolean;
+    value?: string;
+  }>({
     edit: false,
     value: "",
   });
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <Select
+        clearable
+        onClear={() =>
+          setCustomEcmaVersion({
+            edit: false,
+            value: undefined,
+          })
+        }
+        size="md"
         disabled={disabled}
         label="ecmaVersion"
         placeholder="Select value"
         value={
-          !langOptions.ecmaVersion ||
+          langOptions.ecmaVersion &&
           !["5", "3"].includes(langOptions.ecmaVersion)
             ? "Custom"
             : langOptions.ecmaVersion
@@ -45,6 +56,7 @@ function RenderEcmaVersion({
       />
 
       <Input
+        size="md"
         placeholder="Enter custom ecmaVersion"
         disabled={disabled || !customEcmaVersion.edit}
         value={customEcmaVersion.value}
@@ -53,7 +65,7 @@ function RenderEcmaVersion({
           setLangOptions((prev) => ({ ...prev, ecmaVersion: e.target.value }));
         }}
       />
-    </>
+    </div>
   );
 }
 
@@ -78,8 +90,8 @@ function RenderParserOptions({
   }, [localData]);
 
   return (
-    <>
-      <Item
+    <div className="flex  gap-5">
+      {/* <Item
         disabled={disabled}
         onChange={(itemDisabled) => {
           if (itemDisabled)
@@ -91,108 +103,118 @@ function RenderParserOptions({
             }));
         }}
         label="allowReserved"
-      >
-        <Select
-          placeholder="Select value"
-          value={String(localData.allowReserved)}
-          data={["true", "false"]}
-          onChange={(e) =>
-            setlocalData((prev) => ({
-              ...prev,
-              allowReserved: Boolean(e),
-            }))
-          }
-        />
-      </Item>
+        type="h4"
+        size="sm"
+        labelClassName="text-lg"
+      > */}
+      <Select
+        disabled={disabled}
+        label="allowReserved"
+        clearable
+        onClear={() =>
+          setlocalData((prev) => ({
+            ...prev,
+            allowReserved: undefined,
+          }))
+        }
+        placeholder="Select value"
+        value={String(localData.allowReserved)}
+        data={["true", "false"]}
+        onChange={(e) =>
+          setlocalData((prev) => ({
+            ...prev,
+            allowReserved: Boolean(e),
+          }))
+        }
+      />
+      {/* </Item> */}
 
       <Item
+        type="h4"
+        size="sm"
+        labelClassName="text-lg"
         disabled={disabled}
         onChange={(itemDisabled) => {
           if (itemDisabled)
             setLangOptions((prev) => ({
               ...prev,
-              allowReserved: undefined,
               globalReturn: undefined,
               impliedStrict: undefined,
               jsx: undefined,
             }));
+          else {
+            setLangOptions((prev) => ({
+              ...prev,
+              globalReturn: localData.globalReturn,
+              impliedStrict: localData.impliedStrict,
+              jsx: localData.jsx,
+            }));
+          }
         }}
         label="ecmaFeatures"
+        childrenClassName="flex flex-col gap-3"
       >
-        <Item
-          onChange={(itemDisabled) => {
-            if (itemDisabled)
-              setLangOptions((prev) => ({ ...prev, globalReturn: undefined }));
-            else
-              setLangOptions((prev) => ({
-                ...prev,
-                globalReturn: localData.globalReturn,
-              }));
-          }}
+        <Select
+          clearable
+          onClear={() =>
+            setlocalData((prev) => ({
+              ...prev,
+              globalReturn: undefined,
+            }))
+          }
           label="globalReturn"
-        >
-          <Select
-            value={String(localData.globalReturn)}
-            data={["true", "false"]}
-            placeholder="Select value"
-            onChange={(e) =>
-              setlocalData((prev) => ({
-                ...prev,
-                globalReturn: Boolean(e),
-              }))
-            }
-          />
-        </Item>
-        <Item
-          onChange={(itemDisabled) => {
-            if (itemDisabled)
-              setLangOptions((prev) => ({ ...prev, impliedStrict: undefined }));
-            else
-              setLangOptions((prev) => ({
-                ...prev,
-                impliedStrict: localData.impliedStrict,
-              }));
-          }}
+          value={String(localData.globalReturn)}
+          data={["true", "false"]}
+          placeholder="Select value"
+          onChange={(e) =>
+            setlocalData((prev) => ({
+              ...prev,
+              globalReturn: Boolean(e),
+            }))
+          }
+        />
+
+        <Select
           label="impliedStrict"
-        >
-          <Select
-            value={String(localData.impliedStrict)}
-            data={["true", "false"]}
-            placeholder="Select value"
-            onChange={(e) =>
-              setlocalData((prev) => ({
-                ...prev,
-                impliedStrict: Boolean(e),
-              }))
-            }
-          />
-        </Item>
-        <Item
-          onChange={(itemDisabled) => {
-            if (itemDisabled)
-              setLangOptions((prev) => ({ ...prev, jsx: undefined }));
-            else
-              setLangOptions((prev) => ({
-                ...prev,
-                jsx: localData.jsx,
-              }));
-          }}
+          value={String(localData.impliedStrict)}
+          data={["true", "false"]}
+          placeholder="Select value"
+          clearable
+          onClear={() =>
+            setlocalData((prev) => ({
+              ...prev,
+              impliedStrict: undefined,
+            }))
+          }
+          onChange={(e) =>
+            setlocalData((prev) => ({
+              ...prev,
+              impliedStrict: Boolean(e),
+            }))
+          }
+        />
+
+        <Select
+          clearable
+          onClear={() =>
+            setlocalData((prev) => ({
+              ...prev,
+              jsx: undefined,
+            }))
+          }
           label="jsx"
-        >
-          <Select
-            value={String(localData.jsx)}
-            data={["true", "false"]}
-            placeholder="Select value"
-            onChange={(e) =>
-              setlocalData((prev) => ({
-                ...prev,
-                jsx: Boolean(e),
-              }))
-            }
-          />
-        </Item>
+          value={String(localData.jsx)}
+          data={["true", "false"]}
+          placeholder="Select value"
+          onChange={(e) =>
+            setlocalData((prev) => ({
+              ...prev,
+              jsx: Boolean(e),
+            }))
+          }
+        />
       </Item>
-    </>
+    </div>
   );
 }
 
@@ -212,8 +234,11 @@ export default function LangOptions() {
         else setData((prev) => ({ ...prev, langOptions }));
       }}
       label="Include Language options"
+      childrenClassName="flex flex-wrap gap-4 justify-between pt-4"
     >
       <Item
+        labelClassName="text-xl"
+        type="h3"
         onChange={(disabled) => {
           if (disabled)
             setData((prev) => ({
@@ -240,6 +265,8 @@ export default function LangOptions() {
         />
       </Item>
       <Item
+        labelClassName="text-xl"
+        type="h3"
         onChange={(disabled) => {
           if (disabled)
             setData((prev) => ({
@@ -261,9 +288,17 @@ export default function LangOptions() {
         label="Include sourceType"
       >
         <Select
+          clearable
+          onClear={() =>
+            setLangOptions((prev) => ({
+              ...prev,
+              sourceType: undefined,
+            }))
+          }
           label="sourceType"
           value={langOptions.sourceType}
           placeholder="Select value"
+          size="md"
           onChange={(e) =>
             setLangOptions((prev) => ({
               ...prev,
@@ -273,8 +308,9 @@ export default function LangOptions() {
           data={["module", "commonjs", "script"]}
         />
       </Item>
-
       <Item
+        labelClassName="text-xl"
+        type="h3"
         onChange={(disabled) => {
           if (disabled)
             setData((prev) => ({
