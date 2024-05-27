@@ -23,6 +23,8 @@ export default function Name() {
       defaultInclude
       label="Name"
       className="w-auto"
+      infoLabel="A name for the configuration object."
+      infoLink="https://eslint.org/docs/latest/use/configure/configuration-files#configuration-naming-conventions"
     >
       <Input
         placeholder="Enter name of project"

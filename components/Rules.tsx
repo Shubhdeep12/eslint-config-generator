@@ -17,9 +17,11 @@ export default function Rules({ rules }: { rules: string }) {
         else setData((prev) => ({ ...prev, rules: rulesState }));
       }}
       label="Include Rules"
+      infoLabel="An object containing the configured rules."
+      infoLink="https://eslint.org/docs/latest/use/configure/rules"
     >
       <InfiniteScroll
-        limit={20}
+        limit={12}
         getData={(props) =>
           getPaginatedData({
             ...props,
@@ -62,6 +64,7 @@ export default function Rules({ rules }: { rules: string }) {
                     rules: { ...prev.rules, [name]: undefined },
                   }));
                 }}
+                description={item[name].meta.docs.description}
                 value={String(rulesState?.[name])}
                 placeholder="Select value"
                 data={["off", "warn", "error"]}

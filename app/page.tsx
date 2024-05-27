@@ -3,6 +3,7 @@ import Format from "@/components/Format";
 import LangOptions from "@/components/LangOptions";
 import LinterOptions from "@/components/LinterOptions";
 import Name from "@/components/Name";
+import Others from "@/components/Others";
 import RenderJSON from "@/components/RenderJSON";
 import Rules from "@/components/Rules";
 import { getEslintRules } from "@/lib/eslintrules";
@@ -18,6 +19,7 @@ export default async function Home() {
         <FilesAndIgnores />
         <LinterOptions />
         <Rules rules={JSON.stringify(rules || {})} />
+        <Others />
       </section>
       <section className="right-section w-full md:w-1/3 h-full">
         <RenderJSON />

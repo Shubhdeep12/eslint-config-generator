@@ -87,7 +87,7 @@ const InfiniteScroll = ({
       />
       <ScrollArea className="h-[60vh]">
         <div className="flex flex-col items-center gap-4 w-full">
-          <div className="flex gap-4 flex-wrap">
+          <div className="grid grid-cols-3 gap-5 px-4">
             {loading ? (
               <span>Searching...</span>
             ) : (

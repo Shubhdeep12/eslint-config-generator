@@ -1,7 +1,9 @@
 "use client";
 
+import InfoIcon from "@/assets/Info";
 import { cn } from "@/utils/cn";
-import { Checkbox, MenuLabel } from "@mantine/core";
+import { Checkbox, Popover, Text } from "@mantine/core";
+import Link from "next/link";
 import {
   Children,
   ReactElement,
@@ -21,6 +23,8 @@ type ItemProps = {
   labelClassName?: string;
   childrenClassName?: string;
   size?: string;
+  infoLabel?: string;
+  infoLink?: string;
 };
 
 export default function Item({
@@ -34,6 +38,8 @@ export default function Item({
   labelClassName = "font-semibold text-2xl",
   childrenClassName = "",
   size = "md",
+  infoLabel = "",
+  infoLink = "",
 }: ItemProps) {
   const [isDisabled, setIsDisabled] = useState<boolean>(!defaultInclude);
 
@@ -58,7 +64,7 @@ export default function Item({
         "border border-transparent hover:border-gray-300 transition-all rounded-md p-4 mb-2 gap-4 flex flex-col"
       )}
     >
-      <div className="flex gap-2 items-center px-4">
+      <div className="flex items-center px-4">
         <Checkbox
           disabled={disabled}
           checked={!isDisabled}
@@ -69,7 +75,33 @@ export default function Item({
           size={size}
           color="rgba(0,0,0,1)"
         />
-        <Label className={cn(labelClassName)}>{label}</Label>
+        <Label className={cn(labelClassName, "ml-2")}>{label}</Label>
+        {infoLabel && (
+          <Popover width={300} position="top" withArrow shadow="md">
+            <Popover.Target>
+              <div className="ml-1">
+                <InfoIcon />
+              </div>
+            </Popover.Target>
+            <Popover.Dropdown>
+              <div>
+                <Text>{infoLabel}</Text>
+                {infoLink && (
+                  <Text>
+                    <Link
+                      className="text-blue-500 !italic"
+                      href={infoLink}
+                      target="_blank"
+                    >
+                      Click here
+                    </Link>{" "}
+                    to learn more.
+                  </Text>
+                )}
+              </div>
+            </Popover.Dropdown>
+          </Popover>
+        )}
       </div>
 
       {children ? (

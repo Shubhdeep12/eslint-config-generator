@@ -259,6 +259,8 @@ export default function LangOptions() {
       }}
       label="Include Language options"
       childrenClassName="flex flex-wrap gap-4 justify-between pt-4"
+      infoLabel="An object containing settings related to how JavaScript is configured for linting"
+      infoLink="https://eslint.org/docs/latest/use/configure/language-options"
     >
       <Item
         labelClassName="text-xl"
@@ -282,6 +284,7 @@ export default function LangOptions() {
             }));
         }}
         label="Include ecmaVersion"
+        infoLabel="Indicates the ECMAScript version of the code being linted, determining both the syntax and the available global variables."
       >
         <RenderEcmaVersion
           langOptions={langOptions}
@@ -310,6 +313,7 @@ export default function LangOptions() {
             }));
         }}
         label="Include sourceType"
+        infoLabel="Indicates the mode of the JavaScript file being used."
       >
         <Select
           clearable
@@ -364,6 +368,7 @@ export default function LangOptions() {
             }));
         }}
         label="Include parserOptions"
+        infoLabel="If you are using the built-in ESLint parser, you can additionally change how ESLint interprets your code by specifying the languageOptions.parserOptions key."
       >
         <RenderParserOptions
           langOptions={langOptions}

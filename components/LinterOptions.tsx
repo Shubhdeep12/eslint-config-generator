@@ -24,6 +24,7 @@ export default function LinterOptions() {
       }}
       label="Include Linter options"
       childrenClassName="flex w-full gap-4"
+      infoLabel="An object containing settings related to the linting process."
     >
       {/* <Item
         onChange={(disabled) => {

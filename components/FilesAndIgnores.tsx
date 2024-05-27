@@ -14,6 +14,8 @@ export default function FilesAndIgnores() {
           }));
         }}
         label="Include files config"
+        infoLabel="An array of glob patterns indicating the files that the configuration object should apply to."
+        infoLink="https://eslint.org/docs/latest/use/configure/configuration-files#specifying-files-and-ignores"
       />
 
       <Item
@@ -24,6 +26,8 @@ export default function FilesAndIgnores() {
           }));
         }}
         label="Include ignores config"
+        infoLabel="An array of glob patterns indicating the files that the configuration object should not apply to."
+        infoLink="https://eslint.org/docs/latest/use/configure/ignore"
       />
 
       {/* <Checkbox

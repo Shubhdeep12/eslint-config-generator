@@ -16,10 +16,15 @@ export default function getPaginatedData({
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
     const slicedResults = filteredKeys
-      .slice(startIndex, endIndex)
+
       .map((key) => ({
         [key]: data[key],
-      }));
+      }))
+      .filter((oobj) => {
+        console.log(Object.values(oobj));
+        return !Object.values(oobj)[0]?.meta?.deprecated;
+      })
+      .slice(startIndex, endIndex);
 
     return { data: slicedResults };
   } catch (error) {
