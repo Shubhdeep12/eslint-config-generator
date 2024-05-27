@@ -16,7 +16,7 @@ export default function Navbar() {
             Add a Star
           </GitHubButton>
           <GitHubButton
-            href="https://github.com/sponsors/buttons"
+            href="https://github.com/sponsors/Shubhdeep12"
             data-color-scheme="no-preference: light; light: light; dark: light;"
             data-icon="octicon-heart"
             data-size="large"
