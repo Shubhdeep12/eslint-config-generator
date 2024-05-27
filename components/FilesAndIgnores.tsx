@@ -5,10 +5,8 @@ import Item from "./Item";
 export default function FilesAndIgnores() {
   const { setData } = useData();
   return (
-    <div>
+    <>
       <Item
-        labelClassName="text-xl"
-        type="h3"
         onChange={(disabled) => {
           setData((prev) => ({
             ...prev,
@@ -19,8 +17,6 @@ export default function FilesAndIgnores() {
       />
 
       <Item
-        labelClassName="text-xl"
-        type="h3"
         onChange={(disabled) => {
           setData((prev) => ({
             ...prev,
@@ -29,6 +25,7 @@ export default function FilesAndIgnores() {
         }}
         label="Include ignores config"
       />
+
       {/* <Checkbox
         checked={!!data?.files}
         onChange={(e) =>
@@ -40,8 +37,8 @@ export default function FilesAndIgnores() {
         size="md"
         color="rgba(0,0,0,1)"
         label={"Include files config"}
-      />
-      <Checkbox
+        />
+        <Checkbox
         checked={!!data?.ignores}
         onChange={(e) =>
           setData((prev) => ({
@@ -53,6 +50,6 @@ export default function FilesAndIgnores() {
         color="rgba(0,0,0,1)"
         label={"Include ignores config"}
       /> */}
-    </div>
+    </>
   );
 }

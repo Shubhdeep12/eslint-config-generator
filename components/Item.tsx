@@ -52,8 +52,13 @@ export default function Item({
   }, [disabled]);
   const Label = type;
   return (
-    <div className={cn(className, " border rounded-md p-4 mb-2")}>
-      <div className="flex gap-2 items-center mb-4 px-4">
+    <div
+      className={cn(
+        className,
+        "border border-transparent hover:border-gray-300 transition-all rounded-md p-4 mb-2 gap-4 flex flex-col"
+      )}
+    >
+      <div className="flex gap-2 items-center px-4">
         <Checkbox
           disabled={disabled}
           checked={!isDisabled}

@@ -58,7 +58,21 @@ export default function RenderJSON({}: Props) {
           }`}</Text>
         </Button>
       </div>
-      {treeVisible && <LazyReactJson src={cleanData} />}
+      {treeVisible && (
+        <div className="whitespace-pre-wrap font-mono">
+          <Text>
+            {format === "esm" ? "export default " : "module.exports = "}
+          </Text>
+          <LazyReactJson
+            src={cleanData}
+            enableClipboard={false}
+            displayDataTypes={false}
+            displayObjectSize={false}
+            quotesOnKeys={false}
+            name={false}
+          />
+        </div>
+      )}
     </div>
   );
 }

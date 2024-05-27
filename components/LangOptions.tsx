@@ -80,9 +80,11 @@ function RenderParserOptions({
 }) {
   const [localData, setlocalData] = useState({
     allowReserved: langOptions.allowReserved,
-    globalReturn: langOptions.globalReturn,
-    impliedStrict: langOptions.impliedStrict,
-    jsx: langOptions.jsx,
+    ecmaFeatures: {
+      globalReturn: langOptions.ecmaFeatures?.globalReturn,
+      impliedStrict: langOptions.ecmaFeatures?.impliedStrict,
+      jsx: langOptions.ecmaFeatures?.jsx,
+    },
   });
 
   useEffect(() => {
@@ -138,16 +140,20 @@ function RenderParserOptions({
           if (itemDisabled)
             setLangOptions((prev) => ({
               ...prev,
-              globalReturn: undefined,
-              impliedStrict: undefined,
-              jsx: undefined,
+              ecmaFeatures: {
+                globalReturn: undefined,
+                impliedStrict: undefined,
+                jsx: undefined,
+              },
             }));
           else {
             setLangOptions((prev) => ({
               ...prev,
-              globalReturn: localData.globalReturn,
-              impliedStrict: localData.impliedStrict,
-              jsx: localData.jsx,
+              ecmaFeatures: {
+                globalReturn: localData.ecmaFeatures?.globalReturn,
+                impliedStrict: localData.ecmaFeatures?.impliedStrict,
+                jsx: localData.ecmaFeatures?.jsx,
+              },
             }));
           }
         }}
@@ -159,37 +165,49 @@ function RenderParserOptions({
           onClear={() =>
             setlocalData((prev) => ({
               ...prev,
-              globalReturn: undefined,
+              ecmaFeatures: {
+                ...prev.ecmaFeatures,
+                globalReturn: undefined,
+              },
             }))
           }
           label="globalReturn"
-          value={String(localData.globalReturn)}
+          value={String(localData.ecmaFeatures?.globalReturn)}
           data={["true", "false"]}
           placeholder="Select value"
           onChange={(e) =>
             setlocalData((prev) => ({
               ...prev,
-              globalReturn: Boolean(e),
+              ecmaFeatures: {
+                ...prev.ecmaFeatures,
+                globalReturn: Boolean(e),
+              },
             }))
           }
         />
 
         <Select
           label="impliedStrict"
-          value={String(localData.impliedStrict)}
+          value={String(localData.ecmaFeatures?.impliedStrict)}
           data={["true", "false"]}
           placeholder="Select value"
           clearable
           onClear={() =>
             setlocalData((prev) => ({
               ...prev,
-              impliedStrict: undefined,
+              ecmaFeatures: {
+                ...prev.ecmaFeatures,
+                impliedStrict: undefined,
+              },
             }))
           }
           onChange={(e) =>
             setlocalData((prev) => ({
               ...prev,
-              impliedStrict: Boolean(e),
+              ecmaFeatures: {
+                ...prev.ecmaFeatures,
+                impliedStrict: Boolean(e),
+              },
             }))
           }
         />
@@ -199,17 +217,23 @@ function RenderParserOptions({
           onClear={() =>
             setlocalData((prev) => ({
               ...prev,
-              jsx: undefined,
+              ecmaFeatures: {
+                ...prev.ecmaFeatures,
+                jsx: undefined,
+              },
             }))
           }
           label="jsx"
-          value={String(localData.jsx)}
+          value={String(localData.ecmaFeatures?.jsx)}
           data={["true", "false"]}
           placeholder="Select value"
           onChange={(e) =>
             setlocalData((prev) => ({
               ...prev,
-              jsx: Boolean(e),
+              ecmaFeatures: {
+                ...prev.ecmaFeatures,
+                jsx: Boolean(e),
+              },
             }))
           }
         />
@@ -318,9 +342,11 @@ export default function LangOptions() {
               langOptions: {
                 ...prev.langOptions,
                 allowReserved: undefined,
-                globalReturn: undefined,
-                impliedStrict: undefined,
-                jsx: undefined,
+                ecmaFeatures: {
+                  globalReturn: undefined,
+                  impliedStrict: undefined,
+                  jsx: undefined,
+                },
               },
             }));
           else
@@ -329,9 +355,11 @@ export default function LangOptions() {
               langOptions: {
                 ...prev.langOptions,
                 allowReserved: langOptions.allowReserved,
-                globalReturn: langOptions.globalReturn,
-                impliedStrict: langOptions.impliedStrict,
-                jsx: langOptions.jsx,
+                ecmaFeatures: {
+                  globalReturn: langOptions.ecmaFeatures?.globalReturn,
+                  impliedStrict: langOptions.ecmaFeatures?.impliedStrict,
+                  jsx: langOptions.ecmaFeatures?.jsx,
+                },
               },
             }));
         }}

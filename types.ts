@@ -1,11 +1,12 @@
 export type LangOptionsTypes = {
   ecmaVersion?: string;
   sourceType?: string;
-  includeParserOptions?: boolean;
   allowReserved?: boolean;
-  jsx?: boolean;
-  impliedStrict?: boolean;
-  globalReturn?: boolean;
+  ecmaFeatures?: {
+    jsx?: boolean;
+    impliedStrict?: boolean;
+    globalReturn?: boolean;
+  };
 };
 
 export type RulesType = Record<string, string | number | string[] | undefined>;

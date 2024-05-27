@@ -2,15 +2,19 @@
 import { Select } from "@mantine/core";
 import Item from "./Item";
 import { useData } from "../containers/DataContainer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LinterOptionsTypes } from "../types";
 
 export default function LinterOptions() {
   const { setData } = useData();
   const [linterOptions, setLinterOptions] = useState<LinterOptionsTypes>({
-    noInlineConfig: false,
-    reportUnusedDisableDirectives: false,
+    noInlineConfig: undefined,
+    reportUnusedDisableDirectives: undefined,
   });
+  useEffect(() => {
+    setData((prev) => ({ ...prev, linterOptions }));
+  }, [linterOptions]);
+
   return (
     <Item
       onChange={(disabled) => {
