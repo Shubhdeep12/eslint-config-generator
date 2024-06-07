@@ -3,8 +3,8 @@ type Props = {};
 import { lazy, useState } from "react";
 import { useData } from "../containers/DataContainer";
 import { Button, Text } from "@mantine/core";
-import Chevron from "@/assets/Chevron";
-import { cn } from "@/utils/cn";
+import Copy from "@/assets/Copy";
+import Check from "@/assets/Check";
 const LazyReactJson = lazy(() => import("react-json-view"));
 
 function cleanJSON(data: any): any {
@@ -38,8 +38,22 @@ export default function RenderJSON({}: Props) {
   const { data } = useData();
   const { format, ..._data } = data;
   const [treeVisible, setTreeVisible] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
   let cleanData = cleanJSON(_data);
 
+  function handleCopy() {
+    setIsCopied(true);
+    navigator.clipboard.writeText(
+      `${
+        format === "esm" ? "export default " : "module.exports = "
+      } ${JSON.stringify(cleanData)}`
+    );
+    let inte: any;
+    inte = setInterval(() => {
+      setIsCopied(false);
+      clearInterval(inte);
+    }, 2000);
+  }
   return (
     <div className="flex flex-col gap-4">
       <div className="p-2 w-full justify-between bg-black rounded-md flex items-center">
@@ -47,16 +61,27 @@ export default function RenderJSON({}: Props) {
           format === "esm" ? ".mjs" : ".cjs"
         }`}</Text>
 
-        <Button
-          variant="filled"
-          color="dark"
-          size="compact-sm"
-          onClick={() => setTreeVisible((prev) => !prev)}
-        >
-          <Text className="!font-semibold">{`${
-            treeVisible ? "Hide config" : "Show config"
-          }`}</Text>
-        </Button>
+        <div className="flex gap-2 items-center">
+          {!isCopied ? (
+            <Copy
+              className="active:scale-90 scale-100 cursor-pointer transition"
+              onClick={handleCopy}
+            />
+          ) : (
+            <Check />
+          )}
+
+          <Button
+            variant="filled"
+            color="dark"
+            size="compact-sm"
+            onClick={() => setTreeVisible((prev) => !prev)}
+          >
+            <Text className="!font-semibold">{`${
+              treeVisible ? "Hide config" : "Show config"
+            }`}</Text>
+          </Button>
+        </div>
       </div>
       {treeVisible && (
         <div className="whitespace-pre-wrap font-mono">
